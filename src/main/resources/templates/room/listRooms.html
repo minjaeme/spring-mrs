@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|${#temporals.format(date, 'yyyy/M/d')}의 회의실|">2021/1/1의 회의실</title>
+</head>
+<body>
+<h3>회의실 목록</h3>
+<a th:href="@{'/rooms' + ${date.minusDays(1)}}">&lt; 하루 전</a>
+<span th:text="|${#temporals.format(date, 'yyyy/M/d')}의 회의실|">2021/1/1의 회의실</span>
+<a th:href="@{'/rooms' + ${date.plusDays(1)}}">&lt; 하루 후 &gt;</a>
+<ul>
+    <li th:each="root: ${rooms}"><a
+    th:href="@{'/reservations/' + ${date} + '/' + ${room.meetingRoom.roomId}}"
+    th:text="${room.meetingRoom.roomName}"></a>
+    </li>
+</ul>
+</body>
+</html>
